@@ -1,0 +1,8 @@
+// comments
+{
+    "param2b": 22,
+    "nestedParam2b":{
+	"a":["a","list"]
+    },
+    "common2b2cparam": "b"
+}

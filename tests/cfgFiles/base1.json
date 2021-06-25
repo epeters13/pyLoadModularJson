@@ -1,0 +1,10 @@
+// comments
+{
+    "configBase": ["base2a.json","base2b.json","base2c.json"], // base config file name
+    "param1": 4,
+    "nestedParam1":{
+	"a":39,
+	"b":["peee","e","new"],
+	"c": "base1_added"
+    } 
+}

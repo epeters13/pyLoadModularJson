@@ -1,0 +1,11 @@
+// comments
+{
+    "configBase": "base1.json", // base config file name
+    "alternativeBaseStr": "base2c.json", // for custom defined base name
+    "param1": 2,
+    "nestedParam1":{
+	"a":3,
+	"b":["c","d"]
+    }
+ 
+}

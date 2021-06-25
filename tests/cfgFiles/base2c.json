@@ -1,0 +1,11 @@
+// comments
+{
+    "param2b": 98,
+    "nestedParam2b":{ // more comments
+	"a":-12.2
+    },
+    "common2b2cparam": "c",
+    "nestedParam2c":{
+	"astr": "this is new"
+    }
+}
