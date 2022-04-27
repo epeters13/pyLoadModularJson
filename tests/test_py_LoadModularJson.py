@@ -1,9 +1,8 @@
 import sys
-sys.path.append('../')
+sys.path.insert(0, '../')
 
 import unittest
 from pyLoadModularJson import loadModularJson
-
 
 
 cfgFile = 'cfgFiles/delta.json'

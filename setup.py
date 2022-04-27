@@ -6,7 +6,7 @@
 #           By       : Edwin G. W. Peters @ sdr-Surface-Book-2
 # ------------------------------------------------------------------------------
 # File Name          : setup.py
-# Description        : 
+# Description        :
 # ------------------------------------------------------------------------------
 # Copyright          : Insert license
 # ------------------------------------------------------------------------------
@@ -16,10 +16,10 @@ import setuptools
 
 with open("README.md", "r") as fh:
     long_description = fh.read()
-    
+
 setuptools.setup(
     name='pyLoadModularJson',
-    version='0.9.0',
+    version='0.9.1',
     packages=setuptools.find_packages(),
     url='https://github.com/mugpahug/pyLoadModularJson',
     license='MIT',
@@ -39,6 +39,6 @@ setuptools.setup(
     ],
     keywords='json,config,modular,nested',
     install_requires=[
-        'rjsmin'],
+        'rjsmin',
+        'json5'],
 )
-

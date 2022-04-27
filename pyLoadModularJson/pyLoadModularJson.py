@@ -1,19 +1,23 @@
-import json, rjsmin # to strip comments from the json file
+import rjsmin  # to strip comments from the json file
+import json5 as json
 import logging
-import os
 
-## Create these two exceptions for proper exception handling in the recursive funcion calls below
+# Create these two exceptions for proper exception handling in the recursive funcion calls below
+
 
 class JSONFileNotFoundError(Exception):
     pass
 
+
 class JSONDecodeError(Exception):
     pass
 
+
 log = logging.getLogger()
 log.setLevel(logging.WARNING)
-def loadModularJson(configFileName,baseTag='configBase'):
 
+
+def loadModularJson(configFileName, baseTag='configBase'):
     """
     This method loads a json file. The reader strips comments from the json file.
     If the baseTag attribute is found in the root, the base file is loaded and
@@ -21,7 +25,7 @@ def loadModularJson(configFileName,baseTag='configBase'):
     If the baseTag returns a list, the first files in the list take precendence
     over the later.
     The delta file takes precedence over the base file(s).
-    
+
     inputs:
         configFileName -- JSON file with comments
         baseTag        -- tag that indicates base file [default: configBase]
@@ -33,8 +37,7 @@ def loadModularJson(configFileName,baseTag='configBase'):
         """
         used to merge two objects
         merges delta_obj into base_obj 
-        requires structural compatibility, i.e. can't merge dict into non-dict
-        
+        requires structural compatibility, i.e. can't merge dict into non-dict        
         """
         if not isinstance(base_obj, dict):
             return delta_obj
@@ -46,19 +49,17 @@ def loadModularJson(configFileName,baseTag='configBase'):
             base_obj[k] = delta_obj[k]
         return base_obj
 
-    
-    ## load configuration
-    if not isinstance(baseTag,str):
+    # load configuration
+    if not isinstance(baseTag, str):
         raise TypeError('baseTag has to be a string')
-    
     try:
-        cfgFile = open(configFileName, mode='r') 
+        cfgFile = open(configFileName, mode='r')
         strippedJSONHead = rjsmin.jsmin(cfgFile.read())
         cfgFile.close()
         configFile = json.loads(strippedJSONHead)
     except FileNotFoundError as e:
-        log.error('Config file %s not found. Template can be found in conf.json.default' %(configFileName))    
-        raise JSONFileNotFoundError('Config file %s not found. Template can be found in conf.json.default' %(configFileName)) from e
+        log.error('Config file %s not found. Template can be found in conf.json.default' % (configFileName))
+        raise JSONFileNotFoundError('Config file %s not found. Template can be found in conf.json.default' % (configFileName)) from e
 
     confRoot = ''.join(c + '/' for c in configFileName.split('/')[:-1])
 

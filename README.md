@@ -1,13 +1,21 @@
 # pyModularJSON
 
-Allows recursive loading of JSON files. 
+Allows recursive loading of JSON files featuring comments.
+Now uses json5 so it is a bit less picky on line terminations
 
 
 Authored by Edwin Peters
+
 ## Install
+`pip install pyLoadModularJson`
+
+or
+
 `setup.py install`
 
 ## Usage
+
+Also check *tests* folder for a few examples
 
 base.json:
 ```

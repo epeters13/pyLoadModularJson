@@ -2,7 +2,7 @@
 {
     "param2b": 22,
     "nestedParam2b":{
-	"a":["a","list"]
+	"a":["a","list"], // Sloppy commas here
     },
-    "common2b2cparam": "b"
+    "common2b2cparam": "b", // Sloppy commas here
 }
