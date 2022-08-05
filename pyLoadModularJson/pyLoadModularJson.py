@@ -58,39 +58,35 @@ def loadModularJson(configFileName, baseTag='configBase'):
         cfgFile.close()
         configFile = json.loads(strippedJSONHead)
     except FileNotFoundError as e:
-        log.error('Config file %s not found. Template can be found in conf.json.default' % (configFileName))
-        raise JSONFileNotFoundError('Config file %s not found. Template can be found in conf.json.default' % (configFileName)) from e
+        raise JSONFileNotFoundError('Config file %s not found. Examples can be found in test/cfgFiles' % (configFileName)) from e
 
     confRoot = ''.join(c + '/' for c in configFileName.split('/')[:-1])
 
-    def loadBaseFiles(deltaFile,confRoot):        
+    def loadBaseFiles(deltaFile, confRoot):
         if baseTag in deltaFile:
             # load base config
             baseConfigNames = deltaFile[baseTag]
-            if isinstance(baseConfigNames,str):
-                baseConfigNames = [baseConfigNames] # make it a list
-            if not isinstance(baseConfigNames,list):
+            if isinstance(baseConfigNames, str):
+                baseConfigNames = [baseConfigNames]  # make it a list
+            if not isinstance(baseConfigNames, list):
                 raise TypeError('{} has to be a str or list'.format(baseTag))
 
             for baseConfigName in baseConfigNames:
                 log.info("Loading base configuration file: %s", baseConfigName)
                 try:
                     baseConfigPathFileName = confRoot + baseConfigName
-                    cfgFile = open(confRoot+ baseConfigName, mode='r')
+                    cfgFile = open(confRoot + baseConfigName, mode='r')
                     strippedJSONBase = rjsmin.jsmin(cfgFile.read())
                     cfgFile.close()
                     configBase = json.loads(strippedJSONBase)
                     confRoot = ''.join(c + '/' for c in baseConfigPathFileName.split('/')[:-1])
-                    configBase = loadBaseFiles(configBase,confRoot)
-                    deltaFile = selective_merge(configBase,deltaFile)
+                    configBase = loadBaseFiles(configBase, confRoot)
+                    deltaFile = selective_merge(configBase, deltaFile)
                 except FileNotFoundError as e:
-                    log.error('Base config file %s not found. Template can be found in conf.json.default' %(baseConfigName))    
-                    raise JSONFileNotFoundError('Config file %s not found. Template can be found in conf.json.default' %(baseConfigName)) from e
+                    raise JSONFileNotFoundError('Config file %s not found. Template can be found in test/cfgFiles' % (baseConfigName)) from e
                 except json.JSONDecodeError as e:
-                    raise JSONDecodeError('Syntax error in {}'.format(confRoot+baseConfigName),e.doc,e.pos ) from e
-                    
-        return deltaFile;
+                    raise JSONDecodeError('Syntax error in {}'.format(confRoot + baseConfigName), e.doc, e.pos) from e
 
+        return deltaFile
 
-    
-    return loadBaseFiles(configFile,confRoot)
+    return loadBaseFiles(configFile, confRoot)

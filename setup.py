@@ -19,7 +19,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name='pyLoadModularJson',
-    version='0.9.1',
+    version='0.9.2',
     packages=setuptools.find_packages(),
     url='https://github.com/mugpahug/pyLoadModularJson',
     license='MIT',

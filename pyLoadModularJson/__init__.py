@@ -6,10 +6,12 @@
 #           By       : Edwin G. W. Peters @ sdr-Surface-Book-2
 # ------------------------------------------------------------------------------
 # File Name          : __init__.py
-# Description        : 
+# Description        :
 # ------------------------------------------------------------------------------
 # Copyright          : Insert license
 # ------------------------------------------------------------------------------
 
 
 from .pyLoadModularJson import loadModularJson
+from .pyLoadModularJson import JSONFileNotFoundError
+from .pyLoadModularJson import JSONDecodeError
